@@ -1,0 +1,431 @@
+.js-editor-textarea.unsupported {
+  width: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 150px;
+  margin: 0 0 1em; }
+  .js-editor-textarea.unsupported.wikid {
+    display: none; }
+
+.parchment-note {
+  margin: 1em 0; }
+
+.parchment-2 {
+  border: 1px solid #eeeeee;
+  background: white;
+  margin: 1em 0;
+  position: relative; }
+  .parchment-2 .editor {
+    min-height: 150px;
+    padding: 0 10px 10px;
+    margin-top: 10px;
+    color: #333333;
+    position: relative; }
+    .parchment-2 .editor[contenteditable] .spoiler {
+      background: none;
+      outline: 1px dotted #333333; }
+      .parchment-2 .editor[contenteditable] .spoiler * {
+        color: inherit !important; }
+    .parchment-2 .editor:focus {
+      outline: none; }
+  .parchment-2 textarea {
+    display: none;
+    width: 100%;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 150px;
+    border: 0;
+    background: none;
+    font: 12px monospace; }
+  .parchment-2 .toolbar {
+    background: #f3f3f3;
+    border-bottom: 1px dotted #cccccc;
+    padding: 5px 5px 2px;
+    position: absolute;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    top: 0;
+    width: 100%; }
+    .parchment-2 .toolbar.fixed {
+      position: fixed; }
+    .parchment-2 .toolbar.more {
+      display: none; }
+      .parchment-2 .toolbar.more.open {
+        display: block; }
+    .parchment-2 .toolbar > span {
+      margin-right: 6px;
+      display: inline-block; }
+    .parchment-2 .toolbar button {
+      color: #666666;
+      display: inline-block;
+      cursor: pointer;
+      border: 1px solid #c3c3c3;
+      height: 20px;
+      background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') #e3e3e3 no-repeat top;
+      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
+      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#ffffff, #e3e3e3);
+      font: bold 11px/18px Arial, Sans-Serif;
+      margin: 0 0 3px 3px;
+      padding: 0 3px; }
+      .parchment-2 .toolbar button:first-child {
+        margin-left: 0; }
+      .parchment-2 .toolbar button.on {
+        border-color: #008fa9;
+        color: aqua;
+        background-color: #9bc9dc;
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c3e6f5), color-stop(100%, #9bc9dc));
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#c3e6f5, #9bc9dc); }
+        .parchment-2 .toolbar button.on:hover {
+          background-color: #9bc9dc;
+          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #9bc9dc), color-stop(100%, #c3e6f5));
+          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#9bc9dc, #c3e6f5); }
+      .parchment-2 .toolbar button:hover {
+        background-color: white;
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #ffffff));
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#e3e3e3, #ffffff); }
+      .parchment-2 .toolbar button.bold, .parchment-2 .toolbar button.italic, .parchment-2 .toolbar button.underline, .parchment-2 .toolbar button.strikethrough, .parchment-2 .toolbar button.ordered-list, .parchment-2 .toolbar button.unordered-list, .parchment-2 .toolbar button.blockquote {
+        text-indent: -9999px;
+        width: 20px;
+        padding: 0; }
+      .parchment-2 .toolbar button.bold {
+        background-position: center -20px, center; }
+      .parchment-2 .toolbar button.italic {
+        background-position: center -40px, center; }
+      .parchment-2 .toolbar button.underline {
+        background-position: center -60px, center; }
+      .parchment-2 .toolbar button.strikethrough {
+        background-position: center -80px, center; }
+      .parchment-2 .toolbar button.unordered-list {
+        background-position: center -100px, center; }
+      .parchment-2 .toolbar button.ordered-list {
+        background-position: center -120px, center; }
+      .parchment-2 .toolbar button.blockquote {
+        background-position: center -140px, center; }
+      .parchment-2 .toolbar button.link {
+        background-position: left -160px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.video {
+        background-position: left -180px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.table {
+        background-position: left -200px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.image {
+        background-position: left -220px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.remove-format {
+        background-position: left -240px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.list {
+        background-position: left -260px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.spoiler {
+        background-position: left -280px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.teaser {
+        background-position: left -300px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.code {
+        background-position: left -320px, center;
+        padding-left: 20px; }
+      .parchment-2 .toolbar button.more {
+        background-position: right -360px, center;
+        float: right;
+        margin: 0;
+        padding-right: 20px; }
+        .parchment-2 .toolbar button.more:before {
+          content: "More"; }
+        .parchment-2 .toolbar button.more.open {
+          background-position: right -340px, center; }
+          .parchment-2 .toolbar button.more.open:before {
+            content: "Less"; }
+    .parchment-2 .toolbar .dropdown {
+      position: relative; }
+      .parchment-2 .toolbar .dropdown:hover ul {
+        display: block;
+        z-index: 2; }
+      .parchment-2 .toolbar .dropdown:hover > button {
+        border-bottom-color: white;
+        background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') right -340px white no-repeat;
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #ffffff));
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#e3e3e3, #ffffff);
+        background-position: right -340px, center;
+        z-index: 3; }
+      .parchment-2 .toolbar .dropdown > button {
+        text-align: left;
+        position: relative;
+        width: 80px;
+        padding-right: 20px;
+        background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') right -360px no-repeat #e3e3e3;
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#ffffff, #e3e3e3);
+        background-position: right -360px, center; }
+      .parchment-2 .toolbar .dropdown ul {
+        margin: 0;
+        padding: 0;
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #e3e3e3;
+        background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
+        background-image: -webkit-linear-gradient(#ffffff, #e3e3e3);
+        background-image: -moz-linear-gradient(#ffffff, #e3e3e3);
+        background-image: -o-linear-gradient(#ffffff, #e3e3e3);
+        background-image: -ms-linear-gradient(#ffffff, #e3e3e3);
+        background-image: linear-gradient(#ffffff, #e3e3e3);
+        border: 1px solid #c3c3c3;
+        margin-top: -4px;
+        width: 125px; }
+      .parchment-2 .toolbar .dropdown li {
+        margin: 0;
+        list-style-type: none; }
+      .parchment-2 .toolbar .dropdown ul button {
+        border: 0;
+        display: block;
+        margin: 0;
+        background: none;
+        height: auto;
+        width: 100%;
+        text-align: left;
+        padding: 5px 0px 5px 10px; }
+        .parchment-2 .toolbar .dropdown ul button.on {
+          color: #111111;
+          background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') #9bc9dc;
+          background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c3e6f5), color-stop(100%, #9bc9dc));
+          background-image: -webkit-linear-gradient(#c3e6f5, #9bc9dc);
+          background-image: -moz-linear-gradient(#c3e6f5, #9bc9dc);
+          background-image: -o-linear-gradient(#c3e6f5, #9bc9dc);
+          background-image: -ms-linear-gradient(#c3e6f5, #9bc9dc);
+          background-image: linear-gradient(#c3e6f5, #9bc9dc); }
+        .parchment-2 .toolbar .dropdown ul button:hover {
+          background-color: white;
+          background: rgba(0, 0, 0, 0.1); }
+        .parchment-2 .toolbar .dropdown ul button.paragraph {
+          font-weight: normal; }
+        .parchment-2 .toolbar .dropdown ul button.header-2 {
+          font-size: 18px; }
+        .parchment-2 .toolbar .dropdown ul button.header-3 {
+          font-size: 16px; }
+        .parchment-2 .toolbar .dropdown ul button.header-4 {
+          font-size: 14px; }
+  .parchment-2 .parchment-teaser {
+    clear: both;
+    height: 15px;
+    cursor: pointer;
+    border: 0;
+    border-top: 1px dotted #cccccc;
+    background: url(../img/pagebreak.gif) center no-repeat; }
+  .parchment-2 .js-item-cage[rel="image"] > div:hover {
+    outline: 5px dotted black; }
+  .parchment-2 .js-item-cage[rel="video"]:hover, .parchment-2 .js-item-cage[rel="galleries"]:hover, .parchment-2 .js-item-cage[rel="images"]:hover, .parchment-2 .js-item-cage[rel="html"]:hover {
+    outline: 5px dotted black; }
+  .parchment-2 .editor > blockquote:hover {
+    outline: 5px dotted black; }
+
+.parchment-2-edit-menu {
+  background: #444444;
+  padding: 10px;
+  width: 200px;
+  position: absolute;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+  -o-box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px;
+  box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 2px; }
+  .parchment-2-edit-menu button {
+    float: none;
+    min-width: 10px;
+    height: 20px;
+    padding: 0 5px;
+    text-align: center;
+    font: bold 11px/20px Arial, Sans-serif;
+    cursor: pointer;
+    border: 1px solid #1a1a1a;
+    color: #999999;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4e4e4e), color-stop(100%, #212121));
+    background-image: -webkit-linear-gradient(#4e4e4e, #212121);
+    background-image: -moz-linear-gradient(#4e4e4e, #212121);
+    background-image: -o-linear-gradient(#4e4e4e, #212121);
+    background-image: -ms-linear-gradient(#4e4e4e, #212121);
+    background-image: linear-gradient(#4e4e4e, #212121); }
+    .parchment-2-edit-menu button:hover {
+      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #212121), color-stop(100%, #4e4e4e));
+      background-image: -webkit-linear-gradient(#212121, #4e4e4e);
+      background-image: -moz-linear-gradient(#212121, #4e4e4e);
+      background-image: -o-linear-gradient(#212121, #4e4e4e);
+      background-image: -ms-linear-gradient(#212121, #4e4e4e);
+      background-image: linear-gradient(#212121, #4e4e4e); }
+    .parchment-2-edit-menu button.on {
+      color: aqua; }
+  .parchment-2-edit-menu > span {
+    margin-left: 10px;
+    margin-right: 3px; }
+    .parchment-2-edit-menu > span:first-child {
+      margin-left: 0; }
+
+.parchment-2-toolbar {
+  display: none;
+  position: absolute;
+  background: #444444;
+  color: white;
+  font: 12px/22px Arial, Sans-serif;
+  padding: 5px;
+  background-color: #464c53;
+  border: 1px solid #25282c;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -o-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -khtml-border-radius: 4px;
+  border-radius: 4px;
+  -moz-box-shadow: rgba(0, 0, 0, 0.75) 0 4px 8px, rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 0 4px 8px, rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+  -o-box-shadow: rgba(0, 0, 0, 0.75) 0 4px 8px, rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+  box-shadow: rgba(0, 0, 0, 0.75) 0 4px 8px, rgba(255, 255, 255, 0.15) 0 1px 0 inset; }
+  .parchment-2-toolbar.on {
+    display: block; }
+  .parchment-2-toolbar button {
+    float: none;
+    min-width: 10px;
+    height: 20px;
+    padding: 0 5px;
+    text-align: center;
+    font: bold 11px/20px Arial, Sans-Serif;
+    cursor: pointer;
+    border: 1px solid #1a1a1a;
+    color: #999999;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #4e4e4e), color-stop(100%, #212121));
+    background-image: -webkit-linear-gradient(#4e4e4e, #212121);
+    background-image: -moz-linear-gradient(#4e4e4e, #212121);
+    background-image: -o-linear-gradient(#4e4e4e, #212121);
+    background-image: -ms-linear-gradient(#4e4e4e, #212121);
+    background-image: linear-gradient(#4e4e4e, #212121); }
+    .parchment-2-toolbar button:hover {
+      background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #212121), color-stop(100%, #4e4e4e));
+      background-image: -webkit-linear-gradient(#212121, #4e4e4e);
+      background-image: -moz-linear-gradient(#212121, #4e4e4e);
+      background-image: -o-linear-gradient(#212121, #4e4e4e);
+      background-image: -ms-linear-gradient(#212121, #4e4e4e);
+      background-image: linear-gradient(#212121, #4e4e4e); }
+    .parchment-2-toolbar button.on {
+      color: aqua; }
+  .parchment-2-toolbar > span {
+    margin-left: 10px;
+    margin-right: 3px; }
+    .parchment-2-toolbar > span:first-child {
+      margin-left: 0; }
+
+.parchment-2-insert {
+  text-align: center; }
+  .parchment-2-insert img {
+    margin: 0 5px; }
+  .parchment-2-insert textarea {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%; }
+  .parchment-2-insert span {
+    display: block;
+    margin: 5px 0; }
+
+.parchment-2-toolbar.link-autocomplete {
+  display: none;
+  position: absolute; }
+  .parchment-2-toolbar.link-autocomplete.on {
+    display: block; }
+  .parchment-2-toolbar.link-autocomplete .label span {
+    display: none; }
+  .parchment-2-toolbar.link-autocomplete input {
+    height: 25px;
+    width: 300px;
+    border: 0;
+    -moz-box-shadow: rgba(0, 0, 0, 0.35) 0 2px 3px inset;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.35) 0 2px 3px inset;
+    -o-box-shadow: rgba(0, 0, 0, 0.35) 0 2px 3px inset;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 2px 3px inset;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box; }
+  .parchment-2-toolbar.link-autocomplete .vac-filters-toggle a {
+    height: 12px;
+    line-height: 12px; }
+  .parchment-2-toolbar.link-autocomplete[data-filter='wiki'] .label .wiki {
+    display: block; }
+  .parchment-2-toolbar.link-autocomplete[data-filter='user'] .label .user {
+    display: block; }
+  .parchment-2-toolbar.link-autocomplete[data-filter='user'] .vac-filters-toggle {
+    display: none; }
+  .parchment-2-toolbar.link-autocomplete .close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 15px;
+    line-height: 15px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 0.5) 0 -1px 0;
+    background: #2e3338;
+    border: 1px solid #272b2f;
+    -moz-box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+    -webkit-box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+    -o-box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+    box-shadow: rgba(255, 255, 255, 0.15) 0 1px 0 inset;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px; }
+  .parchment-2-toolbar.link-autocomplete .disable {
+    font-size: 10px;
+    text-align: right; }
+
+.vac-filters.parchment-2-link-autocomplete .toggles:before {
+  float: left; }

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Parchment Rich Text Editor</title>
+    <link rel='stylesheet' href='css/parchment.css'>
+</head>
+<body>
+    <textarea id='target'></textarea>
+    <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
+    <script src="js/parchment.js"></script>
+    <script src="js/plugin/blockquote.js"></script>
+    <script src="js/plugin/code.js"></script>
+    <script src="js/plugin/header.js"></script>
+    <script src="js/plugin/html.js"></script>
+    <script src="js/plugin/table.js"></script>
+    <script src="js/plugin/utils.js"></script>
+    <script src="js/plugin/video.js"></script>
+    <script>
+        createParchment({'id': 'target', 'toolbar': 'full'});
+    </script>
+</body>
+</html>
