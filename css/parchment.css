@@ -67,13 +67,13 @@
       cursor: pointer;
       border: 1px solid #c3c3c3;
       height: 20px;
-      background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') #e3e3e3 no-repeat top;
-      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
-      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#ffffff, #e3e3e3);
-      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#ffffff, #e3e3e3);
-      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#ffffff, #e3e3e3);
-      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#ffffff, #e3e3e3);
-      background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#ffffff, #e3e3e3);
+      background: url("../img/icons.png") #e3e3e3 no-repeat top;
+      background-image: url("../img/icons.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
+      background-image: url("../img/icons.png"), -webkit-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url("../img/icons.png"), -moz-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url("../img/icons.png"), -o-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url("../img/icons.png"), -ms-linear-gradient(#ffffff, #e3e3e3);
+      background-image: url("../img/icons.png"), linear-gradient(#ffffff, #e3e3e3);
       font: bold 11px/18px Arial, Sans-Serif;
       margin: 0 0 3px 3px;
       padding: 0 3px; }
@@ -83,28 +83,28 @@
         border-color: #008fa9;
         color: aqua;
         background-color: #9bc9dc;
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c3e6f5), color-stop(100%, #9bc9dc));
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#c3e6f5, #9bc9dc);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#c3e6f5, #9bc9dc);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#c3e6f5, #9bc9dc);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#c3e6f5, #9bc9dc);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#c3e6f5, #9bc9dc); }
+        background-image: url("../img/icons.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c3e6f5), color-stop(100%, #9bc9dc));
+        background-image: url("../img/icons.png"), -webkit-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url("../img/icons.png"), -moz-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url("../img/icons.png"), -o-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url("../img/icons.png"), -ms-linear-gradient(#c3e6f5, #9bc9dc);
+        background-image: url("../img/icons.png"), linear-gradient(#c3e6f5, #9bc9dc); }
         .parchment-2 .toolbar button.on:hover {
           background-color: #9bc9dc;
-          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #9bc9dc), color-stop(100%, #c3e6f5));
-          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#9bc9dc, #c3e6f5);
-          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#9bc9dc, #c3e6f5);
-          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#9bc9dc, #c3e6f5);
-          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#9bc9dc, #c3e6f5);
-          background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#9bc9dc, #c3e6f5); }
+          background-image: url("../img/icons.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #9bc9dc), color-stop(100%, #c3e6f5));
+          background-image: url("../img/icons.png"), -webkit-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url("../img/icons.png"), -moz-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url("../img/icons.png"), -o-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url("../img/icons.png"), -ms-linear-gradient(#9bc9dc, #c3e6f5);
+          background-image: url("../img/icons.png"), linear-gradient(#9bc9dc, #c3e6f5); }
       .parchment-2 .toolbar button:hover {
         background-color: white;
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #ffffff));
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#e3e3e3, #ffffff); }
+        background-image: url("../img/icons.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #ffffff));
+        background-image: url("../img/icons.png"), -webkit-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), -moz-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), -o-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), -ms-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), linear-gradient(#e3e3e3, #ffffff); }
       .parchment-2 .toolbar button.bold, .parchment-2 .toolbar button.italic, .parchment-2 .toolbar button.underline, .parchment-2 .toolbar button.strikethrough, .parchment-2 .toolbar button.ordered-list, .parchment-2 .toolbar button.unordered-list, .parchment-2 .toolbar button.blockquote {
         text-indent: -9999px;
         width: 20px;
@@ -168,13 +168,13 @@
         z-index: 2; }
       .parchment-2 .toolbar .dropdown:hover > button {
         border-bottom-color: white;
-        background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') right -340px white no-repeat;
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #ffffff));
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#e3e3e3, #ffffff);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#e3e3e3, #ffffff);
+        background: url("../img/icons.png") right -340px white no-repeat;
+        background-image: url("../img/icons.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #e3e3e3), color-stop(100%, #ffffff));
+        background-image: url("../img/icons.png"), -webkit-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), -moz-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), -o-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), -ms-linear-gradient(#e3e3e3, #ffffff);
+        background-image: url("../img/icons.png"), linear-gradient(#e3e3e3, #ffffff);
         background-position: right -340px, center;
         z-index: 3; }
       .parchment-2 .toolbar .dropdown > button {
@@ -182,13 +182,13 @@
         position: relative;
         width: 80px;
         padding-right: 20px;
-        background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') right -360px no-repeat #e3e3e3;
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -webkit-linear-gradient(#ffffff, #e3e3e3);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -moz-linear-gradient(#ffffff, #e3e3e3);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -o-linear-gradient(#ffffff, #e3e3e3);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), -ms-linear-gradient(#ffffff, #e3e3e3);
-        background-image: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718'), linear-gradient(#ffffff, #e3e3e3);
+        background: url("../img/icons.png") right -360px no-repeat #e3e3e3;
+        background-image: url("../img/icons.png"), -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ffffff), color-stop(100%, #e3e3e3));
+        background-image: url("../img/icons.png"), -webkit-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url("../img/icons.png"), -moz-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url("../img/icons.png"), -o-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url("../img/icons.png"), -ms-linear-gradient(#ffffff, #e3e3e3);
+        background-image: url("../img/icons.png"), linear-gradient(#ffffff, #e3e3e3);
         background-position: right -360px, center; }
       .parchment-2 .toolbar .dropdown ul {
         margin: 0;
@@ -221,7 +221,7 @@
         padding: 5px 0px 5px 10px; }
         .parchment-2 .toolbar .dropdown ul button.on {
           color: #111111;
-          background: url('//localhost/Users/gpbmike/sandbox/parchment/img/icons.png?1329177718') #9bc9dc;
+          background: url("../img/icons.png") #9bc9dc;
           background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #c3e6f5), color-stop(100%, #9bc9dc));
           background-image: -webkit-linear-gradient(#c3e6f5, #9bc9dc);
           background-image: -moz-linear-gradient(#c3e6f5, #9bc9dc);

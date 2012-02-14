@@ -71,8 +71,8 @@ $parchment_chrome_border_color: #eeeeee !default
       cursor: pointer
       border: 1px solid #c3c3c3
       height: 20px
-      background: image-url('icons.png') #e3e3e3 no-repeat top
-      +background-image(image-url('icons.png'), linear-gradient(white, #e3e3e3))
+      background: url('../img/icons.png') #e3e3e3 no-repeat top
+      +background-image(url('../img/icons.png'), linear-gradient(white, #e3e3e3))
       font: bold 11px / 18px Arial, Sans-Serif
       margin: 0 0 3px 3px
       padding: 0 3px
@@ -82,13 +82,13 @@ $parchment_chrome_border_color: #eeeeee !default
         border-color: #008fa9
         color: #00ffff
         background-color: #9bc9dc
-        +background-image(image-url('icons.png'), linear-gradient(#c3e6f5, #9bc9dc))
+        +background-image(url('../img/icons.png'), linear-gradient(#c3e6f5, #9bc9dc))
         &:hover
           background-color: #9bc9dc
-          +background-image(image-url('icons.png'), linear-gradient(#9bc9dc, #c3e6f5))
+          +background-image(url('../img/icons.png'), linear-gradient(#9bc9dc, #c3e6f5))
       &:hover
         background-color: white
-        +background-image(image-url('icons.png'), linear-gradient(#e3e3e3, white))
+        +background-image(url('../img/icons.png'), linear-gradient(#e3e3e3, white))
       &.bold, &.italic, &.underline, &.strikethrough, &.ordered-list, &.unordered-list, &.blockquote
         text-indent: -9999px
         width: 20px
@@ -153,8 +153,8 @@ $parchment_chrome_border_color: #eeeeee !default
           z-index: 2
         > button
           border-bottom-color: white
-          background: image-url('icons.png') right -340px white no-repeat
-          +background-image(image-url('icons.png'), linear-gradient(#e3e3e3, white))
+          background: url('../img/icons.png') right -340px white no-repeat
+          +background-image(url('../img/icons.png'), linear-gradient(#e3e3e3, white))
           background-position: right -340px, center
           z-index: 3
       > button
@@ -162,8 +162,8 @@ $parchment_chrome_border_color: #eeeeee !default
         position: relative
         width: 80px
         padding-right: 20px
-        background: image-url('icons.png') right -360px no-repeat #e3e3e3
-        +background-image(image-url('icons.png'), linear-gradient(white, #e3e3e3))
+        background: url('../img/icons.png') right -360px no-repeat #e3e3e3
+        +background-image(url('../img/icons.png'), linear-gradient(white, #e3e3e3))
         background-position: right -360px, center
       ul
         margin: 0
@@ -191,7 +191,7 @@ $parchment_chrome_border_color: #eeeeee !default
         padding: 5px 0px 5px 10px
         &.on
           color: #111
-          background: image-url('icons.png') #9bc9dc
+          background: url('../img/icons.png') #9bc9dc
           +background-image(linear-gradient(#c3e6f5, #9bc9dc))
         &:hover
           background-color: white

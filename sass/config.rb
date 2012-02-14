@@ -2,9 +2,9 @@
 
 # Set this to the root of your project when deployed:
 project_path = "/Users/gpbmike/sandbox/parchment/"
-http_path = "//localhost/Users/gpbmike/sandbox/parchment/"
+http_path = "/"
 css_dir = "css"
-images_dir = "img"
+images_dir = "../../img"
 javascripts_dir = "js"
 
 sass_dir = "sass"
