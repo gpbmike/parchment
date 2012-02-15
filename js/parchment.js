@@ -1048,6 +1048,19 @@ var Parchment = (function() {
                     node.parentNode.removeChild(node);
                     continue;
                 }
+				
+				// H1 tags are not supported by the editor, and are stripped out (and their content) on post
+				// to avoid strange behavoir, remove them and append content to parent
+				if (tagName == 'h1')
+				{
+					// Move every child element out node and destroy it
+					while(node.firstChild)
+					{
+						node.parentNode.insertBefore(node.firstChild, node);
+					}
+					node.parentNode.removeChild(node);
+					continue;
+				}
 
                 // remove empty nodes unless they pass the empty node test
                 if (node.childNodes.length === 0) {
