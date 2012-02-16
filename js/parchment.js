@@ -80,7 +80,7 @@ var Parchment = (function() {
 
         // use semantic markup for commands
         // this comes last beause it stops the function for some reason
-		// PATCH NOTES: This line had a typo in it. In the original it was "this.browser.webit"
+        // PATCH NOTES: This line had a typo in it. In the original it was "this.browser.webit"
         if (this.browser.mozilla || this.browser.webkit) {
             document.execCommand("styleWithCSS", false, false);
             document.execCommand("enableObjectResizing", false, false);
@@ -654,9 +654,9 @@ var Parchment = (function() {
                 node = node.parentNode;
             }
 
-			// PATCH NOTES: Out of curiosity, why do these two if conditions exist?
-			// It causes weird behavior (if you delete text into a header it just
-			// undo's it, which is weird). Does it fix a bug? Seems to work without em.
+            // PATCH NOTES: Out of curiosity, why do these two if conditions exist?
+            // It causes weird behavior (if you delete text into a header it just
+            // undo's it, which is weird). Does it fix a bug? Seems to work without em.
 
             // we jumped into a cage, undo and move before the cage
             if (!this.inCage && inCage) {
@@ -701,11 +701,11 @@ var Parchment = (function() {
             event.preventDefault();
         }
 
-		// PATCH NOTES: These lines have a logic error. The first else if captures all
-		// possible truth cases of the second else if, therefore the second else if
-		// can never be reached. (Easily tested in browser, trying to do CTRL-SHIFT-Z
-		// simply does an UNDO and not a REDO.) Adding in the extra shift check fixes
-		// this.
+        // PATCH NOTES: These lines have a logic error. The first else if captures all
+        // possible truth cases of the second else if, therefore the second else if
+        // can never be reached. (Easily tested in browser, trying to do CTRL-SHIFT-Z
+        // simply does an UNDO and not a REDO.) Adding in the extra shift check fixes
+        // this.
         // UNDO
         else if ((event.meta || event.control) && !event.shift && event.key == 'z') {
             event.stop();
@@ -716,8 +716,8 @@ var Parchment = (function() {
         else if ((event.meta || event.control) && event.shift && event.key == 'z') {
             event.stop();
 
-			//MSDN Claims IE doesn't support REDO, but comments seem to suggest it has from 5.5
-			// Can't get it to work right on IE, just seems to move the cursor without working. Not sure if there is a fix
+            //MSDN Claims IE doesn't support REDO, but comments seem to suggest it has from 5.5
+            // Can't get it to work right on IE, just seems to move the cursor without working. Not sure if there is a fix
             document.execCommand('redo', null, null);
         }
 
@@ -796,170 +796,170 @@ var Parchment = (function() {
     };
 
 
-	// TODO: fix inline elements wrapping block elements. eg: <b><h2>huh?</h2></b>
+    // TODO: fix inline elements wrapping block elements. eg: <b><h2>huh?</h2></b>
 
-	// HOLY MOLEY thats a long comment! I guess I needed to thoroughly convince myself that
-	// this thing works.
+    // HOLY MOLEY thats a long comment! I guess I needed to thoroughly convince myself that
+    // this thing works.
 
-	// PATCH NOTES: Heres my attempt to implement this feature, the goal of this implementation is
-	// to go with the "intent" of the original tag placement. That is, if you wrap a block element
-	// with an inline element the intent was probably for every element in the block element to be wrapped
-	// in the inline element. So if you wrap a block with a bold element then everything in the block was
-	// probably meant to bold.
-	//
-	// I think this implementation is reasonably fast for the number of nodes that the editor should be handling,
-	// but I could be wrong. It has to do a bunch of tree traversal, so it might be slow with large elment bases.
-	// On the other hand, if there are no wrongly wrapped elements then it should be fast, and the speed is proportional
-	// to how many messed up elements there are (and number of children)
-	// Also im not sure how it handles non-inline non-block elements (or hybrids...)
-	//
-	// Cases that I tested out:
-	//	INTPUT: <h2><b>Huh?</b></h2>
-	//  OUTPUT: <h2><b>Huh?</b></h2> (Control Case)
+    // PATCH NOTES: Heres my attempt to implement this feature, the goal of this implementation is
+    // to go with the "intent" of the original tag placement. That is, if you wrap a block element
+    // with an inline element the intent was probably for every element in the block element to be wrapped
+    // in the inline element. So if you wrap a block with a bold element then everything in the block was
+    // probably meant to bold.
+    //
+    // I think this implementation is reasonably fast for the number of nodes that the editor should be handling,
+    // but I could be wrong. It has to do a bunch of tree traversal, so it might be slow with large elment bases.
+    // On the other hand, if there are no wrongly wrapped elements then it should be fast, and the speed is proportional
+    // to how many messed up elements there are (and number of children)
+    // Also im not sure how it handles non-inline non-block elements (or hybrids...)
+    //
+    // Cases that I tested out:
+    //  INTPUT: <h2><b>Huh?</b></h2>
+    //  OUTPUT: <h2><b>Huh?</b></h2> (Control Case)
 
-	//	INTPUT: <b><h2>Huh?</h2></b>
-	//  OUTPUT: <h2><b>Huh?</b></h2> (More or less what you would expect)
+    //  INTPUT: <b><h2>Huh?</h2></b>
+    //  OUTPUT: <h2><b>Huh?</b></h2> (More or less what you would expect)
 
-	//	INTPUT: <b>Test <h2>Huh?</h2></b>
-	//  OUTPUT: <p><b>Test</b></p><h2><b>Huh?</b></h2> (The extra <p> around Test is from clean I believe)
+    //  INTPUT: <b>Test <h2>Huh?</h2></b>
+    //  OUTPUT: <p><b>Test</b></p><h2><b>Huh?</b></h2> (The extra <p> around Test is from clean I believe)
 
-	//	INTPUT: <b><b><h2>Huh?</h2></b></b>
-	//  OUTPUT: <h2><b><b>Huh?</b></b></h2>
+    //  INTPUT: <b><b><h2>Huh?</h2></b></b>
+    //  OUTPUT: <h2><b><b>Huh?</b></b></h2>
 
-	//	INTPUT: <h2><b><b><h2>Huh?</h2></b></b></h2>
-	//  OUTPUT: <h2><b><b>Huh?</b></b></h2> (The Extra H2 Gets compressed by later code if I understand correctly)
+    //  INTPUT: <h2><b><b><h2>Huh?</h2></b></b></h2>
+    //  OUTPUT: <h2><b><b>Huh?</b></b></h2> (The Extra H2 Gets compressed by later code if I understand correctly)
 
-	//	INTPUT: <b><h2><b><b><h2>Huh?</h2></b></b></h2></b>
-	//  OUTPUT: <h2><b><b><b>Huh?</b></b></b></h2>
+    //  INTPUT: <b><h2><b><b><h2>Huh?</h2></b></b></h2></b>
+    //  OUTPUT: <h2><b><b><b>Huh?</b></b></b></h2>
 
-	//  This is the most extreme test case I did, but the code seems to handle it well
-	/*	INTPUT:
-		<b>Test
-			<div>
-				<b>Test2</b>
-				<h2>Huh?</h2>
-				<h3>OMG</h3>
-				<b>
-				<i>Thingy</i>
-				</b>
-			</div>
-		</b>
+    //  This is the most extreme test case I did, but the code seems to handle it well
+    /*  INTPUT:
+        <b>Test
+            <div>
+                <b>Test2</b>
+                <h2>Huh?</h2>
+                <h3>OMG</h3>
+                <b>
+                <i>Thingy</i>
+                </b>
+            </div>
+        </b>
 
-		OUTPUTS AS:
-		<b>Test</b>
-		<div>
-			<b>Test2</b>
-			<h2><b>Huh?</b></h2>
-			<h3><b>OMG</b></h3>
-			<b><i>Thingy</i></b>
-		</div>
+        OUTPUTS AS:
+        <b>Test</b>
+        <div>
+            <b>Test2</b>
+            <h2><b>Huh?</b></h2>
+            <h3><b>OMG</b></h3>
+            <b><i>Thingy</i></b>
+        </div>
 
-		EVENTUALLY FORMATTED AS: // For some reason the DIV goes away? I think thats because of other clean effects?
-		<p><b>Test</b><b>Test2</b></p>
+        EVENTUALLY FORMATTED AS: // For some reason the DIV goes away? I think thats because of other clean effects?
+        <p><b>Test</b><b>Test2</b></p>
 
-		<h2><b>Huh?</b></h2>
+        <h2><b>Huh?</b></h2>
 
-		<h3><b>OMG</b></h3>
-		<p><b><i>Thingy</i></b></p>
-	*/
+        <h3><b>OMG</b></h3>
+        <p><b><i>Thingy</i></b></p>
+    */
 
     Parchment.prototype.fixInlineWrappers = function (container) {
 
             var nodes = container.getElementsByTagName('*'), i, node;
 
-			var nodesThatWrap = [];
+            var nodesThatWrap = [];
 
-			// First grab every node that needs to be fixed
-			for (i = 0; i < nodes.length; i++) {
-				node = nodes[i];
-				if(!this.isBlockElement(node) && !(this.style && this.style.display && this.style.display == 'block') && this.hasBlockChildren(node))
-					nodesThatWrap.push(node);
-			}
+            // First grab every node that needs to be fixed
+            for (i = 0; i < nodes.length; i++) {
+                node = nodes[i];
+                if(!this.isBlockElement(node) && !(this.style && this.style.display && this.style.display == 'block') && this.hasBlockChildren(node))
+                    nodesThatWrap.push(node);
+            }
 
-			// Now fix every one of them
-			for (i = 0; i < nodesThatWrap.length; i++) {
-				node = nodesThatWrap[i];
+            // Now fix every one of them
+            for (i = 0; i < nodesThatWrap.length; i++) {
+                node = nodesThatWrap[i];
 
-				var blockNodes = node.getElementsByTagName('*'), j, blockNode, childNode, dup, dupChild;
+                var blockNodes = node.getElementsByTagName('*'), j, blockNode, childNode, dup, dupChild;
 
-				// replace all text nodes with wrapped versions of this node
-				for(j = 0; j < node.childNodes.length; j++)
-				{
-					childNode = node.childNodes[j];
-					if(childNode.nodeType == 3) // Text Node
-					{
-						dup = node.cloneNode(false);
-						dupChild = childNode.cloneNode(false);
-						dup.appendChild(dupChild);
+                // replace all text nodes with wrapped versions of this node
+                for(j = 0; j < node.childNodes.length; j++)
+                {
+                    childNode = node.childNodes[j];
+                    if(childNode.nodeType == 3) // Text Node
+                    {
+                        dup = node.cloneNode(false);
+                        dupChild = childNode.cloneNode(false);
+                        dup.appendChild(dupChild);
 
-						node.replaceChild(dup, childNode);
-					}
-				}
+                        node.replaceChild(dup, childNode);
+                    }
+                }
 
-				// For every node that actually is a block node fix it.
-				for(j = 0; j < blockNodes.length; j++)
-				{
-					blockNode = blockNodes[j];
+                // For every node that actually is a block node fix it.
+                for(j = 0; j < blockNodes.length; j++)
+                {
+                    blockNode = blockNodes[j];
 
-					if(!this.isBlockElement(blockNode))
-						continue;
+                    if(!this.isBlockElement(blockNode))
+                        continue;
 
-					// This block node has children block node, so only replace
-					// the text elements of the block element not the children.
-					if(this.hasBlockChildren(blockNode))
-					{
-						var k;
-						for(k = 0; k < blockNode.childNodes.length; k++)
-						{
-							childNode = blockNode.childNodes[k];
-							if(childNode.nodeType == 3) // Text Node
-							{
-								dup = node.cloneNode(false);
-								dupChild = childNode.cloneNode(false);
+                    // This block node has children block node, so only replace
+                    // the text elements of the block element not the children.
+                    if(this.hasBlockChildren(blockNode))
+                    {
+                        var k;
+                        for(k = 0; k < blockNode.childNodes.length; k++)
+                        {
+                            childNode = blockNode.childNodes[k];
+                            if(childNode.nodeType == 3) // Text Node
+                            {
+                                dup = node.cloneNode(false);
+                                dupChild = childNode.cloneNode(false);
 
-								dup.appendChild(dupChild);
-								blockNode.replaceChild(dup, childNode);
-							}
-						}
-					}
-					else // There are no block children of this child, so just wrap all children in the element
-					{
-						dup = node.cloneNode(false);
-						while(blockNode.firstChild)
-						{
-							dup.appendChild(blockNode.firstChild);
-						}
-						blockNode.appendChild(dup);
-					}
-				}
+                                dup.appendChild(dupChild);
+                                blockNode.replaceChild(dup, childNode);
+                            }
+                        }
+                    }
+                    else // There are no block children of this child, so just wrap all children in the element
+                    {
+                        dup = node.cloneNode(false);
+                        while(blockNode.firstChild)
+                        {
+                            dup.appendChild(blockNode.firstChild);
+                        }
+                        blockNode.appendChild(dup);
+                    }
+                }
 
-				// Move every child element out of the inline node and destroy it
-				while(node.firstChild)
-				{
-					node.parentNode.insertBefore(node.firstChild, node);
-				}
-				node.parentNode.removeChild(node);
-			}
+                // Move every child element out of the inline node and destroy it
+                while(node.firstChild)
+                {
+                    node.parentNode.insertBefore(node.firstChild, node);
+                }
+                node.parentNode.removeChild(node);
+            }
     };
 
-	Parchment.prototype.hasBlockChildren = function(node) {
+    Parchment.prototype.hasBlockChildren = function(node) {
 
         var nodes = node.getElementsByTagName('*'), i;
-		var hasBlockChildren = false;
+        var hasBlockChildren = false;
 
-		for (i = 0; i < nodes.length; i++) {
-			node = nodes[i];
-			if (this.isBlockElement(node) || (this.style && this.style.display && this.style.display == 'block')) {
-				hasBlockChildren = true;
-				break;
-			}
-		}
+        for (i = 0; i < nodes.length; i++) {
+            node = nodes[i];
+            if (this.isBlockElement(node) || (this.style && this.style.display && this.style.display == 'block')) {
+                hasBlockChildren = true;
+                break;
+            }
+        }
 
-		return hasBlockChildren;
-	};
+        return hasBlockChildren;
+    };
 
-	// walks down the tree to find the deepest block element
-	Parchment.prototype.getInlineParent = function (node) {
+    // walks down the tree to find the deepest block element
+    Parchment.prototype.getInlineParent = function (node) {
 
         while (node !== null && this.isBlockElement(node)) {
             node = node.parentNode;
@@ -1027,7 +1027,7 @@ var Parchment = (function() {
             // this.editor.innerHTML = html;
             fragment.innerHTML = html;
 
-			this.fixInlineWrappers(fragment);
+            this.fixInlineWrappers(fragment);
 
             // clean up attributes, remove empty nodes
             var nodes = fragment.getElementsByTagName('*'), i, node;
@@ -1048,19 +1048,19 @@ var Parchment = (function() {
                     node.parentNode.removeChild(node);
                     continue;
                 }
-				
-				// H1 tags are not supported by the editor, and are stripped out (and their content) on post
-				// to avoid strange behavoir, remove them and append content to parent
-				if (tagName == 'h1')
-				{
-					// Move every child element out node and destroy it
-					while(node.firstChild)
-					{
-						node.parentNode.insertBefore(node.firstChild, node);
-					}
-					node.parentNode.removeChild(node);
-					continue;
-				}
+
+                // H1 tags are not supported by the editor, and are stripped out (and their content) on post
+                // to avoid strange behavoir, remove them and append content to parent
+                if (tagName == 'h1')
+                {
+                    // Move every child element out node and destroy it
+                    while(node.firstChild)
+                    {
+                        node.parentNode.insertBefore(node.firstChild, node);
+                    }
+                    node.parentNode.removeChild(node);
+                    continue;
+                }
 
                 // remove empty nodes unless they pass the empty node test
                 if (node.childNodes.length === 0) {
@@ -1444,9 +1444,9 @@ Parchment.Plugins = {
         'type': 'button',
         'init': function () {
 
-			// PATCH NOTES: Its really weird that the bold button toggles on nodetreechange but does
-			// not toggle when you actually press CTRL-B. So I added in some code to actually toggle the
-			// button off and on.
+            // PATCH NOTES: Its really weird that the bold button toggles on nodetreechange but does
+            // not toggle when you actually press CTRL-B. So I added in some code to actually toggle the
+            // button off and on.
             var _this = this; // Have to bind this in order to access it from inside the keydown event
             this.parchment.editor.addEvents({
                 'keydown': function (event) {
@@ -1454,11 +1454,11 @@ Parchment.Plugins = {
                         event.stop();
                         document.execCommand('bold', null, null);
 
-						// Toggles the bold button
-						if(_this.parchment.toolbar.getElement('.bold').hasClass('on'))
-							_this.parchment.toolbar.getElement('.bold').removeClass('on');
-						else
-							_this.parchment.toolbar.getElement('.bold').addClass('on');
+                        // Toggles the bold button
+                        if(_this.parchment.toolbar.getElement('.bold').hasClass('on'))
+                            _this.parchment.toolbar.getElement('.bold').removeClass('on');
+                        else
+                            _this.parchment.toolbar.getElement('.bold').addClass('on');
 
                     }
                 },
@@ -1473,31 +1473,31 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('bold', null, null);
-			
-			// Toggles the bold button
-			if(this.parchment.toolbar.getElement('.bold').hasClass('on'))
-				this.parchment.toolbar.getElement('.bold').removeClass('on');
-			else
-				this.parchment.toolbar.getElement('.bold').addClass('on');
-				
+
+            // Toggles the bold button
+            if(this.parchment.toolbar.getElement('.bold').hasClass('on'))
+                this.parchment.toolbar.getElement('.bold').removeClass('on');
+            else
+                this.parchment.toolbar.getElement('.bold').addClass('on');
+
          //   this.parchment.buildNodeTree();
         }
     },
     'Italic': {
         'type': 'button',
         'init': function () {
-			// PATCH NOTES: Same as above, the button does not toggle when you press CTRL-I
-			var _this = this;
+            // PATCH NOTES: Same as above, the button does not toggle when you press CTRL-I
+            var _this = this;
             this.parchment.editor.addEvents({
                 'keydown': function (event) {
                     if ((event.meta || event.control) && event.key == 'i') {
                         event.stop();
                         document.execCommand('italic', null, null);
 
-						if(_this.parchment.toolbar.getElement('.italic').hasClass('on'))
-							_this.parchment.toolbar.getElement('.italic').removeClass('on');
-						else
-							_this.parchment.toolbar.getElement('.italic').addClass('on');
+                        if(_this.parchment.toolbar.getElement('.italic').hasClass('on'))
+                            _this.parchment.toolbar.getElement('.italic').removeClass('on');
+                        else
+                            _this.parchment.toolbar.getElement('.italic').addClass('on');
                     }
                 },
                 'nodetreechange': function (tag_tree, node_tree) {
@@ -1511,31 +1511,31 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('italic', null, null);
-			
 
-			if(this.parchment.toolbar.getElement('.italic').hasClass('on'))
-				this.parchment.toolbar.getElement('.italic').removeClass('on');
-			else
-				this.parchment.toolbar.getElement('.italic').addClass('on');
-				
+
+            if(this.parchment.toolbar.getElement('.italic').hasClass('on'))
+                this.parchment.toolbar.getElement('.italic').removeClass('on');
+            else
+                this.parchment.toolbar.getElement('.italic').addClass('on');
+
           //  this.parchment.buildNodeTree();
         }
     },
     'Underline': {
         'type': 'button',
         'init': function () {
-			// PATCH NOTES: Same as above, the button does not toggle when you press CTRL-U
-			var _this = this;
+            // PATCH NOTES: Same as above, the button does not toggle when you press CTRL-U
+            var _this = this;
             this.parchment.editor.addEvents({
                 'keydown': function (event) {
                     if ((event.meta || event.control) && event.key == 'u') {
                         event.stop();
                         document.execCommand('underline', null, null);
 
-						if(_this.parchment.toolbar.getElement('.underline').hasClass('on'))
-							_this.parchment.toolbar.getElement('.underline').removeClass('on');
-						else
-							_this.parchment.toolbar.getElement('.underline').addClass('on');
+                        if(_this.parchment.toolbar.getElement('.underline').hasClass('on'))
+                            _this.parchment.toolbar.getElement('.underline').removeClass('on');
+                        else
+                            _this.parchment.toolbar.getElement('.underline').addClass('on');
                     }
                 },
                 'nodetreechange': function (tag_tree, node_tree) {
@@ -1549,13 +1549,13 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('underline', null, null);
-			
-			if(this.parchment.toolbar.getElement('.underline').hasClass('on'))
-				this.parchment.toolbar.getElement('.underline').removeClass('on');
-			else
-				this.parchment.toolbar.getElement('.underline').addClass('on');
-            
-			//this.parchment.buildNodeTree();
+
+            if(this.parchment.toolbar.getElement('.underline').hasClass('on'))
+                this.parchment.toolbar.getElement('.underline').removeClass('on');
+            else
+                this.parchment.toolbar.getElement('.underline').addClass('on');
+
+            //this.parchment.buildNodeTree();
         }
     },
     'Strikethrough': {
@@ -1573,12 +1573,12 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('strikethrough', null, null);
-			
-			if(this.parchment.toolbar.getElement('.strikethrough').hasClass('on'))
-				this.parchment.toolbar.getElement('.strikethrough').removeClass('on');
-			else
-				this.parchment.toolbar.getElement('.strikethrough').addClass('on');
-			
+
+            if(this.parchment.toolbar.getElement('.strikethrough').hasClass('on'))
+                this.parchment.toolbar.getElement('.strikethrough').removeClass('on');
+            else
+                this.parchment.toolbar.getElement('.strikethrough').addClass('on');
+
             //this.parchment.buildNodeTree();
         }
     },

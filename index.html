@@ -7,6 +7,8 @@
 </head>
 <body>
     <textarea id='target'></textarea>
+    <div id='node-tree'></div>
+    <pre id='raw-html'></pre>
     <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
     <script src="js/parchment.js"></script>
     <script src="js/plugin/blockquote.js"></script>
@@ -17,7 +19,11 @@
     <script src="js/plugin/utils.js"></script>
     <script src="js/plugin/video.js"></script>
     <script>
-        createParchment({'id': 'target', 'toolbar': 'full'});
+        var parchment = createParchment({'id': 'target', 'toolbar': 'full'});
+        parchment.editor.addEvent('nodetreechange', function (tag_tree, node_tree) {
+            $('node-tree').set('text', tag_tree.join(' > '));
+            $('raw-html').set('text', parchment.editor.get('html'));
+        });
     </script>
 </body>
 </html>
