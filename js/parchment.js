@@ -1048,6 +1048,19 @@ var Parchment = (function() {
                     node.parentNode.removeChild(node);
                     continue;
                 }
+				
+				// H1 tags are not supported by the editor, and are stripped out (and their content) on post
+				// to avoid strange behavoir, remove them and append content to parent
+				if (tagName == 'h1')
+				{
+					// Move every child element out node and destroy it
+					while(node.firstChild)
+					{
+						node.parentNode.insertBefore(node.firstChild, node);
+					}
+					node.parentNode.removeChild(node);
+					continue;
+				}
 
                 // remove empty nodes unless they pass the empty node test
                 if (node.childNodes.length === 0) {
@@ -1460,7 +1473,14 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('bold', null, null);
-            this.parchment.buildNodeTree();
+			
+			// Toggles the bold button
+			if(this.parchment.toolbar.getElement('.bold').hasClass('on'))
+				this.parchment.toolbar.getElement('.bold').removeClass('on');
+			else
+				this.parchment.toolbar.getElement('.bold').addClass('on');
+				
+         //   this.parchment.buildNodeTree();
         }
     },
     'Italic': {
@@ -1491,7 +1511,14 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('italic', null, null);
-            this.parchment.buildNodeTree();
+			
+
+			if(this.parchment.toolbar.getElement('.italic').hasClass('on'))
+				this.parchment.toolbar.getElement('.italic').removeClass('on');
+			else
+				this.parchment.toolbar.getElement('.italic').addClass('on');
+				
+          //  this.parchment.buildNodeTree();
         }
     },
     'Underline': {
@@ -1522,7 +1549,13 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('underline', null, null);
-            this.parchment.buildNodeTree();
+			
+			if(this.parchment.toolbar.getElement('.underline').hasClass('on'))
+				this.parchment.toolbar.getElement('.underline').removeClass('on');
+			else
+				this.parchment.toolbar.getElement('.underline').addClass('on');
+            
+			//this.parchment.buildNodeTree();
         }
     },
     'Strikethrough': {
@@ -1540,7 +1573,13 @@ Parchment.Plugins = {
         },
         'callback': function () {
             document.execCommand('strikethrough', null, null);
-            this.parchment.buildNodeTree();
+			
+			if(this.parchment.toolbar.getElement('.strikethrough').hasClass('on'))
+				this.parchment.toolbar.getElement('.strikethrough').removeClass('on');
+			else
+				this.parchment.toolbar.getElement('.strikethrough').addClass('on');
+			
+            //this.parchment.buildNodeTree();
         }
     },
     'Ordered List': {
