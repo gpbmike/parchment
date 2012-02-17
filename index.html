@@ -9,6 +9,7 @@
     <textarea id='target'></textarea>
     <div id='node-tree'></div>
     <pre id='raw-html'></pre>
+    <pre id='selection-info'></pre>
     <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
     <script src="js/parchment.js"></script>
     <script src="js/plugin/blockquote.js"></script>
@@ -23,6 +24,19 @@
         parchment.editor.addEvent('nodetreechange', function (tag_tree, node_tree) {
             $('node-tree').set('text', tag_tree.join(' > '));
             $('raw-html').set('text', parchment.editor.get('html'));
+            var selection = parchment.getSelectionObject();
+            var range = parchment.getRangeObject(selection);
+            $('selection-info').set('text', 
+                'Anchor: ' + selection.anchorNode.nodeName + '\n' +
+                'Anchor Offset: ' + selection.anchorOffset + '\n' +
+                'Focus: ' + selection.focusNode.nodeName  + '\n' +
+                'Focus Offset: ' + selection.focusOffset + '\n' +
+                'Range Command Ancestor: ' + range.commonAncestorContainer.nodeName  + '\n' +
+                'Range Start: ' + range.startContainer.nodeName  + '\n' +
+                'Range Start Offset: ' + range.startOffset  + '\n' +
+                'Range End: ' + range.endContainer.nodeName  + '\n'+
+                'Range End Offet: ' + range.endOffset  + '\n' 
+            );
         });
     </script>
 </body>
