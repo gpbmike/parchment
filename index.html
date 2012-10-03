@@ -1,29 +1,222 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="utf-8">
+    <meta charset='utf-8'>
     <title>Parchment Rich Text Editor</title>
-    <link rel='stylesheet' href='css/parchment.css'>
+    <link rel='stylesheet' href='lib/css/bootstrap.css'>
+    <link rel='stylesheet' href='lib/css/bootstrap-wysihtml5-0.0.2.css'>
+    <link rel='stylesheet' href='lib/css/font-awesome.css'>
+    <link rel='stylesheet' href='lib/css/prettify.css'>
+
 </head>
 <body>
-    <textarea id='target'></textarea>
-    <div id='node-tree'></div>
-    <pre id='raw-html'></pre>
-    <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
-    <script src="js/parchment.js"></script>
-    <script src="js/plugin/blockquote.js"></script>
-    <script src="js/plugin/code.js"></script>
-    <script src="js/plugin/header.js"></script>
-    <script src="js/plugin/html.js"></script>
-    <script src="js/plugin/table.js"></script>
-    <script src="js/plugin/utils.js"></script>
-    <script src="js/plugin/video.js"></script>
+    <div class='container'>
+        <div class="page-header">
+            <h1>Parchment <small>An extension of WYSIHTML5</small></h1>
+            <p class='lead'>Requires <a href='https://github.com/xing/wysihtml5'>wysihtml5</a> and <a href='https://github.com/janl/mustache.js'>mustache.js</a>.</p>
+        </div>
+
+        <pre class='prettyprint linenums'>$('textarea').parchment();</pre>
+
+        <form>
+            <textarea class='span12' rows='5' placeholder='Enter Text'></textarea>
+            <pre class="prettyprint linenums">&lt;textarea&gt;&lt;/textarea&gt;</pre>
+            <textarea class='span12' rows='5' placeholder='Enter Text' data-commands='["fontstyles", "emphasis", "lists", "link", "image", "html"]'></textarea>
+            <pre class="prettyprint linenums">&lt;textarea data-commands='["fontstyles", "emphasis", "lists", "link", "image"]'&gt;&lt;/textarea&gt;</pre>
+        </form>
+
+        <h2>So what?</h2>
+        <p>[why use this and not just wysihtml5]</p>
+        <ul>
+            <li>easy toolbar building (templates)</li>
+            <li>different apps get different plugins</li>
+        </ul>
+
+        <p>This demo uses jQuery and modified code from Twitter Bootstrap, bootstrap-wysihtml5, and Font Awesome More, but they are not required.</p>
+    </div>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
+    <script src='http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js'></script>
+    <script src='lib/js/mustache.js'></script>
+    <script src='lib/js/wysihtml5-0.3.0.js'></script>
+    <script src='dist/js/parchment.js'></script>
+    <script src="lib/js/prettify.js"></script>
     <script>
-        var parchment = createParchment({'id': 'target', 'toolbar': 'full'});
-        parchment.editor.addEvent('nodetreechange', function (tag_tree, node_tree) {
-            $('node-tree').set('text', tag_tree.join(' > '));
-            $('raw-html').set('text', parchment.editor.get('html'));
-        });
+
+        Parchment.commands = {
+            fontstyles: {
+                type: 'dropdown',
+                commands: [
+                    { command: 'formatBlock', value: 'div', text: 'Normal Text' },
+                    { command: 'formatBlock', value: 'h1', text: 'Heading 1' },
+                    { command: 'formatBlock', value: 'h2', text: 'Heading 2' },
+                    { command: 'formatBlock', value: 'h3', text: 'Heading 3' }
+                ],
+                init: function () {
+                    $toolbar = $(this.toolbar);
+                    $toolbar.find("a[data-wysihtml5-command='formatBlock']").click(function(e) {
+                        $toolbar.find('.current-font').text($(this).text());
+                    });
+                }
+            },
+            emphasis: {
+                type: 'group',
+                commands: [
+                    { command: 'bold', text: '<i class="icon-bold"></i>' },
+                    { command: 'italic', text: '<i class="icon-italic"></i>' },
+                    { command: 'underline', text: '<i class="icon-underline"></i>' },
+                    { command: 'strikethrough', text: '<i class="icon-strikethrough"></i>' }
+                ]
+            },
+            lists: {
+                type: 'group',
+                commands: [
+                    { command: 'insertUnorderedList', text: '<i class="icon-list-ul"></i>' },
+                    { command: 'insertOrderedList', text: '<i class="icon-list-ol"></i>' },
+                    { command: 'Outdent', text: '<i class="icon-indent-right"></i>' },
+                    { command: 'Indent', text: '<i class="icon-indent-left"></i>' }
+                ]
+            },
+            link: {
+                type: 'group',
+                commands: [
+                    { command: 'createLink', text: '<i class="icon-link"></i>' }
+                ],
+                init: function () {
+
+                    var self = this;
+
+                    $toolbar = $(this.toolbar);
+
+                    var insertLinkModal = $(Mustache.render(Parchment.templates['dialog'], {
+                        title: 'Insert Link',
+                        body: '<input placeholder="http://" class="input-xlarge">',
+                        action: 'Insert Link'
+                    })).modal({
+                        show: false
+                    });
+
+                    var urlInput = insertLinkModal.find('input'),
+                        insertButton = insertLinkModal.find('a.btn-primary');
+
+                    $toolbar.find('a[data-wysihtml5-command=createLink]').on('click', function() {
+                        insertLinkModal.modal('show');
+                        return false;
+                    });
+
+                    insertLinkModal.on('shown', function() {
+                        urlInput.focus();
+                    });
+
+                    insertLinkModal.on('hide', function() {
+                        self.editor.currentView.element.focus();
+                    });
+
+                    var insertLink = function() {
+                        self.editor.composer.commands.exec("createLink", {
+                            href: urlInput.val(),
+                            target: "_blank",
+                            rel: "nofollow"
+                        });
+                        urlInput.val('');
+                    };
+
+                    urlInput.keypress(function (e) {
+                        if (e.which == 13) {
+                            insertLinkModal.modal('hide');
+                            insertLink();
+                        }
+                    });
+
+                    insertButton.on('click', insertLink);
+                }
+            },
+            image: {
+                type: 'group',
+                commands: [
+                    { command: 'insertImage', text: '<i class="icon-picture"></i>' },
+                    { command: 'insertEmbed', text: '<i class="icon-film"></i>' }
+                ],
+                init: function () {
+
+                    var self = this;
+
+                    $toolbar = $(this.toolbar);
+
+                    var insertImageModal = $(Mustache.render(Parchment.templates['dialog'], {
+                        title: 'Insert Image',
+                        body: '<input placeholder="http://" class="input-xlarge">',
+                        action: 'Insert Image'
+                    })).modal({
+                        show: false
+                    });
+
+                    var urlInput = insertImageModal.find('input'),
+                        insertButton = insertImageModal.find('a.btn-primary');
+
+                    $toolbar.find('a[data-wysihtml5-command=insertImage]').on('click', function() {
+                        insertImageModal.modal('show');
+                        return false;
+                    });
+
+                    insertImageModal.on('shown', function() {
+                        urlInput.focus();
+                    });
+
+                    insertImageModal.on('hide', function() {
+                        self.editor.currentView.element.focus();
+                    });
+
+                    var insertImage = function() {
+                        self.editor.composer.commands.exec("insertImage", urlInput.val());
+                        urlInput.val('');
+                    };
+
+                    urlInput.keypress(function (e) {
+                        if (e.which == 13) {
+                            insertImageModal.modal('hide');
+                            insertImage();
+                        }
+                    });
+
+                    insertButton.on('click', insertImage);
+                }
+            },
+            html: {
+                type: 'group',
+                commands: [
+                    { command: 'change_view', text: '<i class="icon-cogs"></i>' }
+                ]
+            }
+        };
+
+        Parchment.templates = {
+            toolbar: '<ul class="wysihtml5-toolbar unstyled">{{&.}}</ul>',
+            dropdown: '<li class="dropdown">{{>dropdown_text}}<ul class="dropdown-menu">{{#commands}}<li>{{>dropdown_command}}</li>{{/commands}}</ul></li>',
+            group: '<li class="btn-group">{{#commands}}{{>command}}{{/commands}}</li>',
+            dialog: "<div class='modal hide fade'>" +
+                        "<div class='modal-header'>" +
+                            "<a class='close' data-dismiss='modal'>&times;</a>" +
+                            "<h3>{{title}}</h3>" +
+                        "</div>" +
+                        "<div class='modal-body'>{{&body}}</div>" +
+                        "<div class='modal-footer'>" +
+                            "<a href='#' class='btn' data-dismiss='modal'>Cancel</a>" +
+                            "<a href='#' class='btn btn-primary' data-dismiss='modal'>{{action}}</a>" +
+                        "</div>" +
+                    "</div>",
+            partials: {
+                dropdown_text:  '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
+                                    '<i class="icon-font"></i>&nbsp;<span class="current-font">Normal text</span>&nbsp;<b class="caret"></b>' +
+                                '</a>',
+                dropdown_command: '<a data-wysihtml5-command="{{command}}" data-wysihtml5-command-value="{{value}}">{{text}}</a>',
+                command: '<a class="btn" data-wysihtml5-command="{{command}}">{{&text}}</a>'
+            }
+        };
+
+        $('textarea').parchment();
+
+        $(prettyPrint);
+
     </script>
 </body>
 </html>
