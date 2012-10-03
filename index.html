@@ -191,8 +191,8 @@
 
         Parchment.templates = {
             toolbar: '<ul class="wysihtml5-toolbar unstyled">{{&.}}</ul>',
-            dropdown: '<li class="dropdown">{{>dropdown_text}}<ul class="dropdown-menu">{{#commands}}<li>{{>dropdown_command}}</li>{{/commands}}</ul></li>',
-            group: '<li class="btn-group">{{#commands}}{{>command}}{{/commands}}</li>',
+            dropdown: '<li class="dropdown">{{>dropdown_text}}<ul class="dropdown-menu">{{#commands}}<li>{{>command}}</li>{{/commands}}</ul></li>',
+            group: '<li class="btn-group">{{#commands}}{{>btn}}{{/commands}}</li>',
             dialog: "<div class='modal hide fade'>" +
                         "<div class='modal-header'>" +
                             "<a class='close' data-dismiss='modal'>&times;</a>" +
@@ -208,8 +208,11 @@
                 dropdown_text:  '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
                                     '<i class="icon-font"></i>&nbsp;<span class="current-font">Normal text</span>&nbsp;<b class="caret"></b>' +
                                 '</a>',
-                dropdown_command: '<a data-wysihtml5-command="{{command}}" data-wysihtml5-command-value="{{value}}">{{text}}</a>',
-                command: '<a class="btn" data-wysihtml5-command="{{command}}">{{&text}}</a>'
+                command: '<a{{>action}}{{>command_attr}}{{>value_attr}}>{{&text}}</a>',
+                btn: '<a class="btn"{{>action_attr}}{{>command_attr}}{{>value_attr}}>{{&text}}</a>',
+                command_attr: '{{#command}} data-wysihtml5-command="{{command}}"{{/command}}',
+                action_attr: '{{#action}} data-wysihtml5-action="{{action}}{{/action}}',
+                value_attr: '{{#value}} data-wysihtml5-value="{{value}}"{{/value}}'
             }
         };
 

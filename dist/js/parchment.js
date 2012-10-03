@@ -4,7 +4,7 @@
 
 var Parchment = function(textarea, options) {
     this.textarea = textarea;
-    this.toolbar = this.createToolbar(textarea, options);
+    this.toolbar = options.toolbar = this.createToolbar(textarea, options);
     this.editor =  this.createEditor(textarea, options);
 
     // want to signal that parchment is ready and trigger any itit callbacks from commands
