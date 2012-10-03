@@ -184,8 +184,15 @@
             html: {
                 type: 'group',
                 commands: [
-                    { command: 'change_view', text: '<i class="icon-cogs"></i>' }
-                ]
+                    { action: 'change_view', text: '<i class="icon-cogs"></i>' }
+                ],
+                init: function () {
+                    var toolbar = $(this.toolbar);
+                    var changeViewSelector = "a[data-wysihtml5-action='change_view']";
+                    toolbar.find(changeViewSelector).on('click', function (e) {
+                        toolbar.find('a.btn').not(changeViewSelector).toggleClass('disabled');
+                    });
+                }
             }
         };
 
@@ -208,11 +215,12 @@
                 dropdown_text:  '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
                                     '<i class="icon-font"></i>&nbsp;<span class="current-font">Normal text</span>&nbsp;<b class="caret"></b>' +
                                 '</a>',
-                command: '<a{{>action}}{{>command_attr}}{{>value_attr}}>{{&text}}</a>',
-                btn: '<a class="btn"{{>action_attr}}{{>command_attr}}{{>value_attr}}>{{&text}}</a>',
+                command: '<a{{>action}}{{>command_attr}}{{>value_attr}}{{>title_attr}}>{{&text}}</a>',
+                btn: '<a class="btn"{{>action_attr}}{{>command_attr}}{{>value_attr}}{{>title_attr}}>{{&text}}</a>',
+                action_attr: '{{#action}} data-wysihtml5-action="{{action}}"{{/action}}',
                 command_attr: '{{#command}} data-wysihtml5-command="{{command}}"{{/command}}',
-                action_attr: '{{#action}} data-wysihtml5-action="{{action}}{{/action}}',
-                value_attr: '{{#value}} data-wysihtml5-value="{{value}}"{{/value}}'
+                value_attr: '{{#value}} data-wysihtml5-command-value="{{value}}"{{/value}}',
+                title_attr: '{{#title}} title="{{title}}"{{/title}}'
             }
         };
 

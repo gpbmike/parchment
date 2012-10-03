@@ -14,6 +14,15 @@ var Parchment = function(textarea, options) {
             $.proxy(command.init, this)();
         }
     }
+
+    // close dropdowns when you focus on the editor
+    $('iframe.wysihtml5-sandbox').each(function(i, el){
+        $(el.contentWindow).off('focus.wysihtml5').on({
+          'focus.wysihtml5' : function(){
+             $('li.dropdown').removeClass('open');
+           }
+        });
+    });
 };
 
 Parchment.prototype = {
