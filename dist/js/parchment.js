@@ -25,6 +25,9 @@ var Parchment = function(textarea, options) {
     });
 };
 
+Parchment.commands = {};
+Parchment.templates = {};
+
 Parchment.prototype = {
     createToolbar: function (textarea, options) {
 
