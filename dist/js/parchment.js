@@ -3,6 +3,7 @@
  */
 
 var Parchment = function(textarea, options) {
+
     this.textarea = textarea;
     this.toolbar = options.toolbar = this.createToolbar(textarea, options);
     this.editor =  this.createEditor(textarea, options);
@@ -14,15 +15,6 @@ var Parchment = function(textarea, options) {
             $.proxy(command.init, this)();
         }
     }
-
-    // close dropdowns when you focus on the editor
-    $('iframe.wysihtml5-sandbox').each(function(i, el){
-        $(el.contentWindow).off('focus.wysihtml5').on({
-          'focus.wysihtml5' : function(){
-             $('li.dropdown').removeClass('open');
-           }
-        });
-    });
 };
 
 Parchment.commands = {};
@@ -64,9 +56,14 @@ $.fn.parchment = function (options) {
 
         var these_options = options || {};
 
-        these_options.commands = $.map(these_options.commands || $this.data('commands') || [], function (command) { return Parchment.commands[command]; });
+        these_options.commands = $.map(these_options.commands || $this.data('parchment-commands') || [], function (command) { return Parchment.commands[command]; });
+        these_options.parserRules = Parchment.parserRules[$this.data('parchment-parserrules')];
 
-        new Parchment(this, these_options);
+        var parchment = new Parchment(this, these_options);
+
+        $(parchment.editor.composer.iframe.contentWindow).on('focus.wysihtml5', function () {
+            $('li.dropdown').removeClass('open');
+        });
 
     });
 };
