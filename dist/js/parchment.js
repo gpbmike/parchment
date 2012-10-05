@@ -4,21 +4,65 @@
 
 var Parchment = function(textarea, options) {
 
-    this.textarea = textarea;
-    this.toolbar = options.toolbar = this.createToolbar(textarea, options);
-    this.editor =  this.createEditor(textarea, options);
+    var name,
+        i = 0,
+        init_commands = [];
 
-    // want to signal that parchment is ready and trigger any itit callbacks from commands
-    for (var index in options.commands) {
-        var command = options.commands[index];
+    options = options || {};
+
+    var parseCommand = function (command) {
         if (command.init) {
-            $.proxy(command.init, this)();
+            init_commands.push(command.init);
         }
+        if (command.parserRules) {
+            options.parserRules = $.extend(true, options.parserRules, command.parserRules);
+        }
+    };
+
+    // go through each command and tease out init callbacks and parser rules
+    $.each(options.commands || [], function (i, command) {
+
+        if (command.commands) {
+            $.each(command.commands, function (i, command) {
+                parseCommand(command);
+            });
+        }
+
+        parseCommand(command);
+
+    });
+
+    this.textarea = textarea;
+    this.toolbar =  options.toolbar = this.createToolbar(textarea, options);
+    this.editor =   new wysihtml5.Editor(textarea, options);
+
+    // editor is ready, initialize commands
+    for (name in init_commands) {
+        init_commands[name].call(this);
     }
+
 };
 
 Parchment.commands = {};
 Parchment.templates = {};
+
+Parchment.utils = {
+    addCommand: function (commandName, params) {
+        Parchment.commands[commandName] = params;
+    },
+    commandGroup: function (commandName, commands, options) {
+
+        options = options || {};
+
+        Parchment.commands[commandName] = {
+            commands: $.map(commands, function (command) { return Parchment.commands[command]; })
+        };
+
+        if (options.type) {
+            Parchment.commands[commandName].type = options.type;
+        }
+    }
+};
 
 Parchment.prototype = {
     createToolbar: function (textarea, options) {
@@ -30,10 +74,17 @@ Parchment.prototype = {
             commands = options.commands || Parchment.commands,
             templates = options.templates || Parchment.templates;
 
-        for (var index in commands) {
-            var group = commands[index];
-            toolbar_inner += Mustache.render(templates[group.type], group, templates.partials);
-        }
+        $.each(commands, function (i, command) {
+
+            var commands = [command.command];
+
+            if (command.commands) {
+                commands = $.map(command.commands, function (command) { return command.command; });
+            }
+
+            toolbar_inner += Mustache.render(templates[command.type || 'command'], { commands: commands }, templates.partials);
+
+        });
 
         temp.innerHTML = Mustache.render(Parchment.templates['toolbar'], toolbar_inner);
 
@@ -42,10 +93,6 @@ Parchment.prototype = {
         textarea.parentNode.insertBefore(toolbar, textarea);
 
         return toolbar;
-    },
-
-    createEditor: function (textarea, options) {
-        return new wysihtml5.Editor(textarea, options);
     }
 };
 
@@ -54,10 +101,17 @@ $.fn.parchment = function (options) {
 
         $this = $(this);
 
-        var these_options = options || {};
+        var name,
+            these_options = options || {},
+            formatted_commands = [];
 
-        these_options.commands = $.map(these_options.commands || $this.data('parchment-commands') || [], function (command) { return Parchment.commands[command]; });
-        these_options.parserRules = Parchment.parserRules[$this.data('parchment-parserrules')];
+        command_list = these_options.commands || $this.data('parchment-commands') || [];
+
+        for (name in command_list) {
+            formatted_commands.push(Parchment.commands[command_list[name]]);
+        }
+
+        these_options.commands = formatted_commands;
 
         var parchment = new Parchment(this, these_options);
 

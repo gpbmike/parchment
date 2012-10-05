@@ -7,212 +7,42 @@
     <link rel='stylesheet' href='lib/css/bootstrap-wysihtml5-0.0.2.css'>
     <link rel='stylesheet' href='lib/css/font-awesome.css'>
     <link rel='stylesheet' href='lib/css/prettify.css'>
-
 </head>
 <body>
     <div class='container'>
         <div class="page-header">
             <h1>Parchment <small>An extension of WYSIHTML5</small></h1>
-            <p class='lead'>Requires <a href='https://github.com/xing/wysihtml5'>wysihtml5</a> and <a href='https://github.com/janl/mustache.js'>mustache.js</a>.</p>
+            <p class='lead'>Requires <a href='https://github.com/jquery/jquery'>jQuery</a>, <a href='https://github.com/xing/wysihtml5'>wysihtml5</a> and <a href='https://github.com/janl/mustache.js'>mustache.js</a>.</p>
         </div>
 
         <form>
-            <textarea class='span12' rows='5' placeholder='Enter Text' data-parchment-commands='["fontstyles", "emphasis", "lists", "blockquote", "link", "image", "html"]' data-parchment-parserrules='simple'></textarea>
-            <pre class="prettyprint linenums">&lt;textarea data-commands='["fontstyles", "emphasis", "lists", "blockquote", "link", "image", "html"]'&gt;&lt;/textarea&gt;</pre>
+            <textarea class='span12' rows='5' placeholder='Enter Text' data-parchment-commands='["headers", "emphasis", "lists", "blockquote", "link", "media", "html"]'></textarea>
+<pre class="prettyprint linenums">&lt;textarea
+    data-parchment-commands='["fontstyles", "emphasis", "lists", "blockquote", "link", "image", "html"]'&gt;
+&lt;/textarea&gt;</pre>
             <pre class='prettyprint linenums'>$('textarea').parchment();</pre>
         </form>
 
         <h2>So what?</h2>
-        <p>[why use this and not just wysihtml5]</p>
-        <ul>
-            <li>easy toolbar building (templates)</li>
-            <li>different apps get different plugins</li>
-        </ul>
+        <p>The goal of this project is to easily customize rich text editors between apps.</p>
 
-        <p>This demo uses jQuery and modified code from Twitter Bootstrap, bootstrap-wysihtml5, and Font Awesome More, but they are not required.</p>
+        <h3>Commands</h3>
+        <p>A command is a plugin for the rich text editor. <code>bold</code>, <code>italic</code> and <code>underline</code> are all commands.</p>
+        <p><code>command</code>, <code>parserRules</code>, <code>init</code></p>
+        <p><code>Parchment.utils.addCommand</code>, <code>Parchment.utils.commandGroup</code></p>
+
+        <h3>Templates</h3>
+        <p>Something about Mustache here.</p>
+
+        <h3>Acknowledgements</h3>
+        <p>This demo uses Twitter Bootstrap, bootstrap-wysihtml5, and Font Awesome More.</p>
     </div>
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js'></script>
     <script src='http://netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js'></script>
     <script src='lib/js/mustache.js'></script>
-    <script src='lib/js/advanced.js'></script>
     <script src='lib/js/wysihtml5-0.3.0.js'></script>
     <script src='dist/js/parchment.js'></script>
-    <script src='dist/js/parchment.image.js'></script>
     <script src="lib/js/prettify.js"></script>
-    <script>
-
-        Parchment.parserRules = {
-            simple: {
-                tags: {
-                    strong: {},
-                    b:      {},
-                    i:      {},
-                    em:     {},
-                    br:     {},
-                    p:      {},
-                    div:    {},
-                    span:   {},
-                    ul:     {},
-                    ol:     {},
-                    li:     {},
-                    a:      {
-                        set_attributes: {
-                            target: "_blank",
-                            rel:    "nofollow"
-                        },
-                        check_attributes: {
-                            href:   "url" // important to avoid XSS
-                        }
-                    }
-                }
-            }
-        }
-
-        Parchment.commands.fontstyles = {
-            type: 'dropdown',
-            commands: [
-                { command: 'formatBlock', value: 'p', text: 'Normal Text' },
-                { command: 'formatBlock', value: 'h1', text: 'Heading 1' },
-                { command: 'formatBlock', value: 'h2', text: 'Heading 2' },
-                { command: 'formatBlock', value: 'h3', text: 'Heading 3' }
-            ],
-            init: function () {
-                $toolbar = $(this.toolbar);
-                $toolbar.find("a[data-wysihtml5-command='formatBlock']").filter(function () {
-                    return $.inArray($(this).data('wysihtml5-command-value'), ['p', 'h1', 'h2', 'h3']) >= 0;
-                }).on('click', function(e) {
-                    $toolbar.find('.current-font').text($(this).text());
-                });
-            }
-        };
-
-        Parchment.commands.emphasis = {
-            type: 'group',
-            commands: [
-                { command: 'bold', text: '<i class="icon-bold"></i>', title: 'Bold' },
-                { command: 'italic', text: '<i class="icon-italic"></i>', title: 'Italic' },
-                { command: 'underline', text: '<i class="icon-underline"></i>', title: 'Underline' },
-                { command: 'strikethrough', text: '<i class="icon-strikethrough"></i>', title: 'Strikethrough' },
-                { command: 'removeFormat', text: '<i class="icon-remove"></i>', title: 'Remove Format' }
-            ]
-        };
-
-        Parchment.commands.lists = {
-            type: 'group',
-            commands: [
-                { command: 'insertUnorderedList', text: '<i class="icon-list-ul"></i>', title: 'Unordered List' },
-                { command: 'insertOrderedList', text: '<i class="icon-list-ol"></i>', title: 'Ordered List' }
-            ]
-        };
-
-        Parchment.commands.link = {
-            type: 'group',
-            commands: [
-                { command: 'createLink', text: '<i class="icon-link"></i>' }
-            ],
-            init: function () {
-
-                var self = this;
-
-                $toolbar = $(this.toolbar);
-
-                var insertLinkModal = $(Mustache.render(Parchment.templates['dialog'], {
-                    title: 'Insert Link',
-                    body: '<input placeholder="http://" class="input-xlarge">',
-                    action: 'Insert Link'
-                })).modal({
-                    show: false
-                });
-
-                var urlInput = insertLinkModal.find('input'),
-                    insertButton = insertLinkModal.find('a.btn-primary');
-
-                $toolbar.find('a[data-wysihtml5-command=createLink]').on('click', function() {
-                    insertLinkModal.modal('show');
-                    return false;
-                });
-
-                insertLinkModal.on('shown', function() {
-                    urlInput.focus();
-                });
-
-                insertLinkModal.on('hide', function() {
-                    self.editor.currentView.element.focus();
-                });
-
-                var insertLink = function() {
-                    self.editor.composer.commands.exec("createLink", {
-                        href: urlInput.val(),
-                        target: "_blank",
-                        rel: "nofollow"
-                    });
-                    urlInput.val('');
-                };
-
-                urlInput.keypress(function (e) {
-                    if (e.which == 13) {
-                        insertLinkModal.modal('hide');
-                        insertLink();
-                    }
-                });
-
-                insertButton.on('click', insertLink);
-            }
-        };
-
-        Parchment.commands.html = {
-            type: 'group',
-            commands: [
-                { action: 'change_view', text: '<i class="icon-cogs"></i>', title: 'HTML View' }
-            ],
-            init: function () {
-                var toolbar = $(this.toolbar);
-                var changeViewSelector = "a[data-wysihtml5-action='change_view']";
-                toolbar.find(changeViewSelector).on('click', function (e) {
-                    toolbar.find('a.btn').not(changeViewSelector).toggleClass('disabled');
-                });
-            }
-        };
-
-        Parchment.commands.blockquote = {
-            type: 'group',
-            commands: [
-                { command: 'formatBlock', value: 'blockquote', text: '<i class="icon-comment"></i>', title: 'Blockquote' }
-            ]
-        };
-
-        Parchment.templates = {
-            toolbar: '<ul class="wysihtml5-toolbar unstyled">{{&.}}</ul>',
-            dropdown: '<li class="dropdown">{{>dropdown_text}}<ul class="dropdown-menu">{{#commands}}<li>{{>command}}</li>{{/commands}}</ul></li>',
-            group: '<li class="btn-group">{{#commands}}{{>btn}}{{/commands}}</li>',
-            dialog: "<div class='modal hide fade'>" +
-                        "<div class='modal-header'>" +
-                            "<a class='close' data-dismiss='modal'>&times;</a>" +
-                            "<h3>{{title}}</h3>" +
-                        "</div>" +
-                        "<div class='modal-body'>{{&body}}</div>" +
-                        "<div class='modal-footer'>" +
-                            "<a href='#' class='btn' data-dismiss='modal'>Cancel</a>" +
-                            "<a href='#' class='btn btn-primary' data-dismiss='modal'>{{action}}</a>" +
-                        "</div>" +
-                    "</div>",
-            partials: {
-                dropdown_text:  '<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">' +
-                                    '<i class="icon-font"></i>&nbsp;<span class="current-font">Normal text</span>&nbsp;<b class="caret"></b>' +
-                                '</a>',
-                command: '<a{{>action}}{{>command_attr}}{{>value_attr}}{{>title_attr}}>{{&text}}</a>',
-                btn: '<a class="btn"{{>action_attr}}{{>command_attr}}{{>value_attr}}{{>title_attr}}>{{&text}}</a>',
-                action_attr: '{{#action}} data-wysihtml5-action="{{action}}"{{/action}}',
-                command_attr: '{{#command}} data-wysihtml5-command="{{command}}"{{/command}}',
-                value_attr: '{{#value}} data-wysihtml5-command-value="{{value}}"{{/value}}',
-                title_attr: '{{#title}} title="{{title}}"{{/title}}'
-            }
-        };
-
-        $('textarea').parchment();
-
-        $(prettyPrint);
-
-    </script>
+    <script src='lib/js/parchment-demo.js'></script>
 </body>
 </html>
