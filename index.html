@@ -7,8 +7,52 @@
 </head>
 <body>
     <textarea id='target'></textarea>
-    <div id='node-tree'></div>
-    <pre id='raw-html'></pre>
+    
+    <div style="border: 1px solid black; borde-radius: 10px; padding: 5px;">
+        <div style="border-bottom: 1px dotted black; font-weight: bold; font-size: 22px">
+            Debugging Tools
+        </div>  
+        
+        <div style="margin-top: 10px;">
+            <div style="font-weight: bold;">
+                Insert Cage (Add with Enter):
+            </div>
+            <textarea id='cageText' style="width: 400px; height: 100px;"></textarea>
+        </div>
+        
+        <div style="margin-top: 10px;">
+            <div style="font-weight: bold;">
+                Node Tree:
+            </div>
+            <div id='node-tree'>Not created yet.</div>
+        </div>
+        
+        <div style="margin-top: 10px;">
+            <div style="font-weight: bold;">
+                Raw Html:
+            </div>
+            <pre id='raw-html'></pre>
+        </div>
+            
+        <div style="margin-top: 10px;">
+        
+            <div style="font-weight: bold;">
+                Selection Information:
+            </div>
+            <pre id='selection-info'>Anchor: None
+Anchor Offset: None
+Focus: None
+Focus Offset: None
+Range Command Ancestor: None
+Range Start: None
+Range Start Offset: None
+Range End: None
+Range End Offet: None
+            </pre>
+        </div>
+        
+    </div>
+    
     <script src="https://ajax.googleapis.com/ajax/libs/mootools/1.4.1/mootools-yui-compressed.js"></script>
     <script src="js/parchment.js"></script>
     <script src="js/plugin/blockquote.js"></script>
@@ -22,6 +66,32 @@
         var parchment = createParchment({'id': 'target', 'toolbar': 'full'});
         parchment.editor.addEvent('nodetreechange', function (tag_tree, node_tree) {
             $('node-tree').set('text', tag_tree.join(' > '));
+            $('raw-html').set('text', parchment.editor.get('html'));
+            var selection = parchment.getSelectionObject();
+            var range = parchment.getRangeObject(selection);
+            $('selection-info').set('text', 
+                'Anchor: ' + selection.anchorNode.nodeName + '\n' +
+                'Anchor Offset: ' + selection.anchorOffset + '\n' +
+                'Focus: ' + selection.focusNode.nodeName  + '\n' +
+                'Focus Offset: ' + selection.focusOffset + '\n' +
+                'Range Command Ancestor: ' + range.commonAncestorContainer.nodeName  + '\n' +
+                'Range Start: ' + range.startContainer.nodeName  + '\n' +
+                'Range Start Offset: ' + range.startOffset  + '\n' +
+                'Range End: ' + range.endContainer.nodeName  + '\n'+
+                'Range End Offet: ' + range.endOffset  + '\n' 
+            );
+        });
+        
+        window.addEvent('domready', function() {
+            $('cageText').addEvent( 'keydown', function (event) {
+               if(event.code == '13')
+               {
+                    parchment.insertCage($('cageText').get('value'));
+                    $('cageText').set('value', '');
+                    return false;
+               }
+            });
+            
             $('raw-html').set('text', parchment.editor.get('html'));
         });
     </script>

@@ -37,6 +37,10 @@ Parchment.Plugins['Blockquote'] = {
 
         // undo blockquote if you're in it
         if (index >= 0) {
+            
+            // Save selection before hand
+            var oldRange = range.cloneRange();
+        
             selection.removeAllRanges();
 
             // find and remove citations
@@ -45,20 +49,35 @@ Parchment.Plugins['Blockquote'] = {
                 range.selectNode(cite[i]);
                 selection.addRange(range);
             }
-            document.execCommand('delete', false, false);
+            
+            if(selection.rangeCount > 0)
+                document.execCommand('delete', false, false);
 
-            range.selectNode(this.parchment.node_tree[index]);
-            selection.addRange(range);
+           /* range.selectNode(this.parchment.node_tree[index]);
+            selection.addRange(range);*/
+            
+            // Restore old selection
+            selection.addRange(oldRange);
+            
             document.execCommand('formatBlock', null, '<P>');
-
+            
         }
 
         else {
+            // Bug in Firefox makes blockquotes not work when only one line exists in the editor,
+            // this fixes that 
+            // https://bugzilla.mozilla.org/show_bug.cgi?id=557412
+            var p = document.createElement("p");
+            this.parchment.editor.appendChild(p);
+        
             document.execCommand('formatBlock', null, '<BLOCKQUOTE>');
 
             if (this.parchment.options.toolbar == 'news') {
                 this.parchment.editor.getElements('blockquote').addClass('news');
             }
+            
+            // Remove kludge that fixes firefox problem
+            this.parchment.editor.removeChild(p);
         }
 
         this.parchment.buildNodeTree();
