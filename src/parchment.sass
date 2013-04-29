@@ -1,0 +1,190 @@
+@import "../libs/bourbon/bourbon"
+
+$copy_normal: #333333 !default
+$link_primary: blue !default
+$bg_invert: black !default
+
+$parchment_canvas_background: white !default
+$parchment_canvas_copy_color: $copy_normal !default
+$parchment_canvas_link_color: $link_primary !default
+$parchment_chrome_background: white !default
+$parchment_chrome_border_color: #eeeeee !default
+
+.js-editor-textarea.unsupported
+  width: 100%
+  +box-sizing(border-box)
+  min-height: 150px
+  margin: 0 0 1em
+  &.wikid
+    display: none
+
+.parchment-note
+  margin: 1em 0
+
+.parchment
+  border: 1px solid $parchment_chrome_border_color
+  background: $parchment_canvas_background
+  margin: 1em 0
+  position: relative
+  .parchment-content
+    min-height: 150px
+    padding: 0 10px 10px
+    margin-top: 10px
+    color: $parchment_canvas_copy_color
+    position: relative
+    +clearfix
+    &[contenteditable]
+      .spoiler
+        background: none
+        outline: 1px dotted $copy_normal
+        *
+          color: inherit !important
+    &:focus
+      outline: none
+  textarea
+    width: 100%
+    +box-sizing(border-box)
+    min-height: 150px
+    border: 0
+    background: none
+    font: 12px monospace
+  .toolbar
+    background: #f3f3f3
+    border-bottom: 1px dotted #CCC
+    padding: 5px 5px 2px
+    position: absolute
+    +box-sizing(border-box)
+    top: 0
+    width: 100%
+    &.fixed
+      position: fixed
+    &.more
+      display: none
+      &.open
+        display: block
+    > span
+      margin-right: 6px
+      display: inline-block
+  .embed-cage:hover
+    outline: 5px dotted $bg_invert
+  .editor > blockquote:hover
+    outline: 5px dotted $bg_invert
+  .embed-type-pagebreak, .embed-type-teaser
+    clear: both
+    height: 15px
+    cursor: pointer
+    border: 0
+    border-top: 1px dotted #ccc
+    &:hover
+      outline: none
+  .embed-type-pagebreak
+    background: url(/static/editor/img/parchment2/pagebreak.png) center no-repeat
+  .embed-type-teaser
+    background: url(/static/editor/img/parchment2/teaser.png) center no-repeat
+
+.parchment-edit-menu
+  background: #444
+  padding: 10px
+  width: 200px
+  position: absolute
+  border-radius: 5px
+  box-shadow: 2px 2px 2px rgba(0,0,0,.3)
+  display: none
+  &.on
+    display: block
+  button
+    float: none
+    min-width: 10px
+    height: 20px
+    padding: 0 5px
+    text-align: center
+    font: bold 11px / 20px Arial, Sans-serif
+    cursor: pointer
+    border: 1px solid #1a1a1a
+    color: #999
+    +background-image(linear-gradient(#4e4e4e, #212121))
+    &:hover
+      +background-image(linear-gradient(#212121, #4e4e4e))
+    &.on
+      color: #00ffff
+  > span
+    margin-left: 10px
+    margin-right: 3px
+    &:first-child
+      margin-left: 0
+
+.parchment-toolbar
+  display: none
+  position: absolute
+  background: #444444
+  color: #fff
+  font: 12px / 22px Arial, Sans-serif
+  padding: 5px
+  background-color: hsl(210,9%,30%)
+  border: 1px solid #25282c
+  border-radius: 4px
+  box-shadow: 0 4px 8px rgba(0,0,0,.75), inset 0 1px 0 rgba(255,255,255,.15)
+  &.on
+    display: block
+  button
+    float: none
+    min-width: 10px
+    height: 20px
+    padding: 0 5px
+    text-align: center
+    font: bold 11px / 20px Arial, Sans-Serif
+    cursor: pointer
+    border: 1px solid #1a1a1a
+    color: #999
+    +background-image(linear-gradient(#4e4e4e, #212121))
+    &:hover
+      +background-image(linear-gradient(#212121, #4e4e4e))
+    &.on
+      color: #00ffff
+  > span
+    margin-left: 10px
+    margin-right: 3px
+    &:first-child
+      margin-left: 0
+
+.parchment-insert
+  text-align: center
+  img
+    margin: 0 5px
+  textarea
+    +box-sizing(border-box)
+    width: 100%
+  span
+    display: block
+    margin: 5px 0
+
+.parchment-toolbar.quicklink
+  .label span
+    display: none
+  input
+    height: 25px
+    width: 300px
+    border: 0
+    box-shadow: inset 0 2px 3px rgba(0,0,0,.35)
+    border-radius: 4px
+    +box-sizing(border-box)
+  .close
+    cursor: pointer
+    position: absolute
+    top: 5px
+    right: 5px
+    width: 15px
+    line-height: 15px
+    font-size: 10px
+    font-weight: bold
+    text-align: center
+    text-transform: uppercase
+    color: #fff
+    text-shadow: rgba(0,0,0,.5) 0 -1px 0
+    background: hsl(210,9%,20%)
+    border: 1px solid hsl(210,9%,17%)
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.15)
+    border-radius: 4px
+  .disable
+    font-size: 10px
+    text-align: right

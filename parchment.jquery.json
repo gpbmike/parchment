@@ -1,0 +1,26 @@
+{
+  "name": "parchment",
+  "title": "Parchment",
+  "description": "A rich text editor.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/gpbmike/parchment",
+  "author": {
+    "name": "gpbmike",
+    "email": "gpbmike@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gpbmike/parchment.git"
+  },
+  "bugs": "https://github.com/gpbmike/parchment/issues",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/gpbmike/parchment/blob/master/LICENSE-MIT"
+    }
+  ],
+  "dependencies": {
+    "jquery": "*"
+  },
+  "keywords": []
+}

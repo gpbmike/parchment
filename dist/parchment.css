@@ -1,0 +1,195 @@
+.js-editor-textarea.unsupported {
+  width: 100%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  min-height: 150px;
+  margin: 0 0 1em; }
+  .js-editor-textarea.unsupported.wikid {
+    display: none; }
+
+.parchment-note {
+  margin: 1em 0; }
+
+.parchment {
+  border: 1px solid #eeeeee;
+  background: white;
+  margin: 1em 0;
+  position: relative; }
+  .parchment .parchment-content {
+    min-height: 150px;
+    padding: 0 10px 10px;
+    margin-top: 10px;
+    color: #333333;
+    position: relative;
+    *zoom: 1; }
+    .parchment .parchment-content:before, .parchment .parchment-content:after {
+      content: " ";
+      display: table; }
+    .parchment .parchment-content:after {
+      clear: both; }
+    .parchment .parchment-content[contenteditable] .spoiler {
+      background: none;
+      outline: 1px dotted #333333; }
+      .parchment .parchment-content[contenteditable] .spoiler * {
+        color: inherit !important; }
+    .parchment .parchment-content:focus {
+      outline: none; }
+  .parchment textarea {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 150px;
+    border: 0;
+    background: none;
+    font: 12px monospace; }
+  .parchment .toolbar {
+    background: #f3f3f3;
+    border-bottom: 1px dotted #cccccc;
+    padding: 5px 5px 2px;
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    top: 0;
+    width: 100%; }
+    .parchment .toolbar.fixed {
+      position: fixed; }
+    .parchment .toolbar.more {
+      display: none; }
+      .parchment .toolbar.more.open {
+        display: block; }
+    .parchment .toolbar > span {
+      margin-right: 6px;
+      display: inline-block; }
+  .parchment .embed-cage:hover {
+    outline: 5px dotted black; }
+  .parchment .editor > blockquote:hover {
+    outline: 5px dotted black; }
+  .parchment .embed-type-pagebreak, .parchment .embed-type-teaser {
+    clear: both;
+    height: 15px;
+    cursor: pointer;
+    border: 0;
+    border-top: 1px dotted #cccccc; }
+    .parchment .embed-type-pagebreak:hover, .parchment .embed-type-teaser:hover {
+      outline: none; }
+  .parchment .embed-type-pagebreak {
+    background: url(/static/editor/img/parchment2/pagebreak.png) center no-repeat; }
+  .parchment .embed-type-teaser {
+    background: url(/static/editor/img/parchment2/teaser.png) center no-repeat; }
+
+.parchment-edit-menu {
+  background: #444444;
+  padding: 10px;
+  width: 200px;
+  position: absolute;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+  display: none; }
+  .parchment-edit-menu.on {
+    display: block; }
+  .parchment-edit-menu button {
+    float: none;
+    min-width: 10px;
+    height: 20px;
+    padding: 0 5px;
+    text-align: center;
+    font: bold 11px/20px Arial, Sans-serif;
+    cursor: pointer;
+    border: 1px solid #1a1a1a;
+    color: #999999;
+    background-image: -webkit-linear-gradient( #4e4e4e, #212121);
+    background-image: linear-gradient( #4e4e4e, #212121); }
+    .parchment-edit-menu button:hover {
+      background-image: -webkit-linear-gradient( #212121, #4e4e4e);
+      background-image: linear-gradient( #212121, #4e4e4e); }
+    .parchment-edit-menu button.on {
+      color: cyan; }
+  .parchment-edit-menu > span {
+    margin-left: 10px;
+    margin-right: 3px; }
+    .parchment-edit-menu > span:first-child {
+      margin-left: 0; }
+
+.parchment-toolbar {
+  display: none;
+  position: absolute;
+  background: #444444;
+  color: white;
+  font: 12px/22px Arial, Sans-serif;
+  padding: 5px;
+  background-color: #464c53;
+  border: 1px solid #25282c;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.15); }
+  .parchment-toolbar.on {
+    display: block; }
+  .parchment-toolbar button {
+    float: none;
+    min-width: 10px;
+    height: 20px;
+    padding: 0 5px;
+    text-align: center;
+    font: bold 11px/20px Arial, Sans-Serif;
+    cursor: pointer;
+    border: 1px solid #1a1a1a;
+    color: #999999;
+    background-image: -webkit-linear-gradient( #4e4e4e, #212121);
+    background-image: linear-gradient( #4e4e4e, #212121); }
+    .parchment-toolbar button:hover {
+      background-image: -webkit-linear-gradient( #212121, #4e4e4e);
+      background-image: linear-gradient( #212121, #4e4e4e); }
+    .parchment-toolbar button.on {
+      color: cyan; }
+  .parchment-toolbar > span {
+    margin-left: 10px;
+    margin-right: 3px; }
+    .parchment-toolbar > span:first-child {
+      margin-left: 0; }
+
+.parchment-insert {
+  text-align: center; }
+  .parchment-insert img {
+    margin: 0 5px; }
+  .parchment-insert textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%; }
+  .parchment-insert span {
+    display: block;
+    margin: 5px 0; }
+
+.parchment-toolbar.quicklink .label span {
+  display: none; }
+.parchment-toolbar.quicklink input {
+  height: 25px;
+  width: 300px;
+  border: 0;
+  box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.35);
+  border-radius: 4px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+.parchment-toolbar.quicklink .close {
+  cursor: pointer;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 15px;
+  line-height: 15px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: rgba(0, 0, 0, 0.5) 0 -1px 0;
+  background: #2e3338;
+  border: 1px solid #272b2f;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-radius: 4px; }
+.parchment-toolbar.quicklink .disable {
+  font-size: 10px;
+  text-align: right; }
