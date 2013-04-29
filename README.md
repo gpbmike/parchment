@@ -2,6 +2,8 @@
 
 A rich text editor.
 
+DO NOT USE THIS. IT IS NOT READY FOR PRODUCTION.
+
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
